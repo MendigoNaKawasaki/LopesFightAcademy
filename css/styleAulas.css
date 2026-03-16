@@ -1,0 +1,496 @@
+/* ============================================
+   CALENDÁRIO DE AULAS - Tema LFA
+   ============================================ */
+
+:root {
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --background: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text: #ffffff;
+    --text-muted: #9ca3af;
+    --border: #404040;
+    --error: #ef4444;
+    --success: #10b981;
+    --warning: #f59e0b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+header {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.header-nav {
+    display: flex;
+    gap: 12px;
+}
+
+.nav-link {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+h1 {
+    color: var(--primary);
+    font-size: 28px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-info span {
+    color: var(--text-muted);
+}
+
+.btn-logout {
+    background: var(--error);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-logout:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   INSTRUÇÕES
+   ============================================ */
+
+.instrucoes {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-left: 4px solid var(--primary);
+}
+
+.instrucoes h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.instrucoes p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* ============================================
+   CALENDÁRIO
+   ============================================ */
+
+.calendario-wrapper {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.calendario {
+    display: grid;
+    grid-template-columns: 80px repeat(7, 1fr);
+    gap: 6px;
+    min-width: 1200px;
+}
+
+.cal-header {
+    background: var(--primary);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cal-header.cal-empty {
+    background: var(--card-bg);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.cal-header.cal-dia {
+    font-size: 16px;
+}
+
+.cal-hora {
+    background: var(--background);
+    color: var(--text-muted);
+    padding: 10px;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 6px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cal-slot {
+    min-height: 70px;
+    border-radius: 6px;
+    border: 2px dashed var(--border);
+    background: var(--background);
+    transition: all 0.3s;
+}
+
+/* Aula disponível */
+.cal-slot.com-aula {
+    background: var(--primary);
+    border: 2px solid var(--primary);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cal-slot.com-aula:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5);
+}
+
+/* Aula onde estou inscrito */
+.cal-slot.inscrito {
+    background: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.cal-slot.inscrito:hover {
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
+}
+
+/* Aula lotada */
+.cal-slot.lotada {
+    background: #6b7280;
+    border-color: #4b5563;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.cal-slot.lotada:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.aula-nome {
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.aula-professor {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 6px;
+}
+
+.aula-vagas {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* ============================================
+   MINHAS INSCRIÇÕES
+   ============================================ */
+
+.minhas-inscricoes-container {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.minhas-inscricoes-container h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.inscricoes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 16px;
+}
+
+.inscricao-card {
+    background: var(--background);
+    border: 2px solid #3b82f6;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
+}
+
+.inscricao-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.inscricao-info {
+    flex: 1;
+}
+
+.inscricao-nome {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.inscricao-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.btn-cancelar-inscricao {
+    background: var(--error);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.btn-cancelar-inscricao:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+.vazio {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 40px;
+    font-size: 16px;
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 450px;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h3 {
+    color: var(--primary);
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.modal-details {
+    background: var(--background);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.modal-content p {
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.btn-confirmar {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-confirmar:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-cancelar {
+    background: #6b7280;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-cancelar:hover {
+    background: #4b5563;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   MENSAGENS
+   ============================================ */
+
+.mensagem {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    animation: slideIn 0.3s ease-out;
+}
+
+.mensagem-sucesso {
+    background: var(--success);
+    color: white;
+}
+
+.mensagem-erro {
+    background: var(--error);
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1400px) {
+    .calendario {
+        min-width: 1000px;
+    }
+    
+    .aula-nome {
+        font-size: 12px;
+    }
+    
+    .aula-professor {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .calendario {
+        min-width: 800px;
+        font-size: 11px;
+    }
+
+    .cal-slot {
+        min-height: 60px;
+    }
+
+    .inscricoes-list {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,169 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            color: rgb(0, 255, 0);
+            font-family: Georgia, serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            width: 90%;
+            max-width: 450px;
+            background-color: rgb(15, 15, 15);
+            border: 3px solid rgb(0, 200, 0);
+            border-radius: 10px;
+            padding: 50px 40px;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-size: 2.5em;
+            color: rgb(0, 255, 0);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            margin-bottom: 15px;
+        }
+
+        .login-header p {
+            color: white;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: white;
+            font-size: 1.05em;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            background-color: black;
+            border: 2px solid rgb(0, 150, 0);
+            border-radius: 5px;
+            color: rgb(0, 255, 0);
+            font-family: Georgia, serif;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: rgb(0, 255, 0);
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+
+        input::placeholder {
+            color: rgb(0, 100, 0);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            accent-color: rgb(0, 255, 0);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            font-size: 0.95em;
+            font-weight: normal;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background-color: rgb(0, 180, 0);
+            border: 2px solid rgb(0, 255, 0);
+            border-radius: 5px;
+            color: white;
+            font-family: Georgia, serif;
+            font-size: 1.15em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.2);
+        }
+
+        .btn-login:hover {
+            background-color: rgb(0, 220, 0);
+            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .login-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .login-footer a {
+            color: #0275d8;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: color 0.3s ease;
+        }
+
+        .login-footer a:hover {
+            color: #01447e;
+            text-decoration: underline;
+        }
+
+        .divider {
+            margin: 25px 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgb(0, 150, 0), transparent);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 40px 25px;
+            }
+
+            .login-header h1 {
+                font-size: 2em;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            .btn-login {
+                padding: 12px;
+            }
+        }

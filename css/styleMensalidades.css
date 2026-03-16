@@ -1,0 +1,439 @@
+/* ============================================
+   MENSALIDADES - Tema LFA
+   ============================================ */
+
+:root {
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --background: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text: #ffffff;
+    --text-muted: #9ca3af;
+    --border: #404040;
+    --error: #ef4444;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --atrasado: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+header {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.header-nav {
+    display: flex;
+    gap: 12px;
+}
+
+.nav-link {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+h1 {
+    color: var(--primary);
+    font-size: 28px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-info span {
+    color: var(--text-muted);
+}
+
+.btn-logout {
+    background: var(--error);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-logout:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   RESUMO
+   ============================================ */
+
+.resumo-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.resumo-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-left: 4px solid var(--primary);
+    transition: all 0.3s;
+}
+
+.resumo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.resumo-card.pendentes {
+    border-left-color: var(--warning);
+}
+
+.resumo-card.atrasadas {
+    border-left-color: var(--error);
+}
+
+.resumo-card.pagas {
+    border-left-color: var(--success);
+}
+
+.resumo-icon {
+    font-size: 40px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 12px;
+}
+
+.resumo-card.pendentes .resumo-icon {
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.resumo-card.atrasadas .resumo-icon {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.resumo-info {
+    flex: 1;
+}
+
+.resumo-label {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.resumo-valor {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text);
+}
+
+/* ============================================
+   SECÇÕES
+   ============================================ */
+
+.secao {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.secao h2 {
+    color: var(--primary);
+    margin-bottom: 24px;
+    font-size: 22px;
+}
+
+.lista-pagamentos {
+    display: grid;
+    gap: 16px;
+}
+
+/* ============================================
+   CARDS DE PAGAMENTO
+   ============================================ */
+
+.pagamento-card {
+    background: var(--background);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    transition: all 0.3s;
+}
+
+.pagamento-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pagamento-card.pendente {
+    border-color: var(--warning);
+}
+
+.pagamento-card.atrasado {
+    border-color: var(--error);
+}
+
+.pagamento-card.pago {
+    border-color: var(--success);
+}
+
+.pagamento-header {
+    background: var(--card-bg);
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+}
+
+.pagamento-mes {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.pagamento-status {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-pendente {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--warning);
+}
+
+.status-atrasado {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--error);
+}
+
+.status-pago {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+}
+
+.pagamento-body {
+    padding: 20px;
+}
+
+.pagamento-info {
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row .label {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.info-row .value {
+    color: var(--text);
+    font-size: 16px;
+}
+
+.info-row.multa {
+    background: rgba(239, 68, 68, 0.1);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 8px 0;
+}
+
+.info-row.multa .label,
+.info-row.multa .value {
+    color: var(--error);
+}
+
+.info-row.total {
+    background: rgba(16, 185, 129, 0.1);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+.info-row.total .label,
+.info-row.total .value {
+    color: var(--primary);
+    font-size: 18px;
+}
+
+.pagamento-detalhes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.detalhe {
+    flex: 1;
+    min-width: 150px;
+}
+
+.detalhe-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.detalhe span:not(.detalhe-label) {
+    color: var(--text);
+    font-size: 14px;
+}
+
+.detalhe.atras .destaque {
+    color: var(--error);
+    font-weight: bold;
+}
+
+/* ============================================
+   VAZIO
+   ============================================ */
+
+.vazio {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+    font-size: 16px;
+}
+
+/* ============================================
+   MENSAGENS
+   ============================================ */
+
+.mensagem {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 2000;
+    animation: slideIn 0.3s ease-out;
+}
+
+.mensagem-sucesso {
+    background: var(--success);
+    color: white;
+}
+
+.mensagem-erro {
+    background: var(--error);
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .resumo-container {
+        grid-template-columns: 1fr;
+    }
+
+    .pagamento-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .pagamento-detalhes {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}

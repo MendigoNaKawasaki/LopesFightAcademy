@@ -1,0 +1,302 @@
+/* ============================================
+   PERFIL DE ATLETA - styleAtleta.css
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* ============================================
+   BREADCRUMB
+   ============================================ */
+
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.breadcrumb li::after {
+    content: " >";
+    margin-left: 0.5rem;
+}
+
+.breadcrumb li:last-child::after {
+    content: "";
+}
+
+.breadcrumb a {
+    color: #10b981;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: #34d399;
+    text-decoration: underline;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header img {
+    height: 60px;
+    transition: transform 0.3s;
+}
+
+header img:hover {
+    transform: scale(1.1);
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #10b981;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+main > p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+
+section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    border-left: 4px solid #10b981;
+}
+
+section h2 {
+    color: #10b981;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #333;
+}
+
+/* ============================================
+   FOTO E INFO PRINCIPAL
+   ============================================ */
+
+section:first-of-type {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.foto {
+    text-align: center;
+}
+
+.foto img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+    border: 3px solid #10b981;
+}
+
+section ul {
+    list-style: none;
+}
+
+section ul li {
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #333;
+}
+
+section ul li:last-child {
+    border-bottom: none;
+}
+
+section ul li strong {
+    color: #10b981;
+    margin-right: 0.5rem;
+}
+
+/* ============================================
+   TABELA DE LUTAS
+   ============================================ */
+
+.centerTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.centerTable thead {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.centerTable th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.centerTable tbody tr {
+    border-bottom: 1px solid #333;
+    transition: all 0.3s;
+}
+
+.centerTable tbody tr:hover {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.centerTable td {
+    padding: 1rem;
+    color: #ddd;
+}
+
+/* ============================================
+   SOBRE
+   ============================================ */
+
+section:last-of-type p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #ddd;
+}
+
+/* ============================================
+   BADGES E DESTAQUEES
+   ============================================ */
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #10b981;
+    margin-left: 0.5rem;
+}
+
+.record-destaque {
+    font-size: 1.3rem;
+    color: #10b981;
+    font-weight: 700;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    main {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    section:first-of-type {
+        grid-template-columns: 1fr;
+    }
+
+    .foto img {
+        max-width: 250px;
+    }
+
+    .centerTable {
+        font-size: 0.85rem;
+    }
+
+    .centerTable th,
+    .centerTable td {
+        padding: 0.5rem;
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #10b981;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #059669;
+}
