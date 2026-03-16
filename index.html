@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LFA - Academia de Artes Marciais</title>
+    <link rel="stylesheet" href="css/indexcss.css">
+    <link rel="shortcut icon" href="media/tiny.png" type="image/x-icon">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="media/pequeno.png" alt="LFA Logo">
+            </a>
+        </div>
+        <nav>
+            <a href="#home">Início</a>
+            <a href="Aulas.html">Aulas</a>
+            <a href="#contact">Contacto</a>
+            <a href="Atletas.html">Atletas</a>
+            <a href="Perfil.html" id="perfilLink" style="display: none;">Perfil</a>
+            <a href="Admin.html" id="adminLink" style="display: none; color: #fbbf24;">👨‍💼 Admin</a>
+            <button class="auth-button" id="loginBtn">Entrar / Criar Conta</button>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <span class="user-name" id="userName"></span>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MODAL AUTENTICAÇÃO -->
+    <div class="modal" id="authModal" style="display: none;">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h2 class="modal-title">Bem-vindo à Família!</h2>
+            <p class="modal-subtitle">Entre ou crie a sua conta para começar</p>
+
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="login">Entrar</button>
+                <button class="tab-btn" data-tab="registo">Criar Conta</button>
+            </div>
+
+            <div class="error-message" id="errorMessage" style="display: none;"></div>
+            <div class="success-message" id="successMessage" style="display: none;"></div>
+
+            <!-- LOGIN -->
+            <form class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required placeholder="seu@email.com" autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPass">Palavra-passe</label>
+                    <input type="password" id="loginPass" name="pass" required placeholder="******" autocomplete="current-password">
+                </div>
+                <button type="submit" class="submit-btn" id="loginSubmitBtn">Entrar</button>
+                <div class="loading" id="loginLoading" style="display: none;">Processando...</div>
+            </form>
+
+            <!-- REGISTO -->
+            <form class="auth-form" id="registoForm">
+                <div class="form-group">
+                    <label for="registoNome">Nome Completo</label>
+                    <input type="text" id="registoNome" name="nome" required placeholder="Digite o seu nome" autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="registoIdade">Idade</label>
+                    <input type="number" id="registoIdade" name="idade" required min="5" max="120" placeholder="A sua idade">
+                </div>
+                <div class="form-group">
+                    <label for="registoFaixa">Graduação / Faixa</label>
+                    <select id="registoFaixa" name="arte_marcial" required>
+                        <option value="">Selecione...</option>
+                        <option value="Branca">Branca</option>
+                        <option value="Amarela">Amarela</option>
+                        <option value="Laranja">Laranja</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Azul">Azul</option>
+                        <option value="Marrom">Castanha (Marrom)</option>
+                        <option value="Preta">Preta</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="registoEmail">Email</label>
+                    <input type="email" id="registoEmail" name="email" required placeholder="seu@email.com" autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="registoPass">Palavra-passe</label>
+                    <input type="password" id="registoPass" name="pass" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="registoConfirmarPass">Confirmar Palavra-passe</label>
+                    <input type="password" id="registoConfirmarPass" name="confirmarPass" required minlength="6" placeholder="Digite novamente" autocomplete="new-password">
+                </div>
+                <button type="submit" class="submit-btn" id="registoSubmitBtn">Criar Conta</button>
+                <div class="loading" id="registoLoading" style="display: none;">Processando...</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1><img src="media/pequeno.png" alt="LFA"></h1>
+            <div class="subtitle">MMA & Brazilian Jiu-Jitsu</div>
+            <p>Transforma o teu corpo e mente através das artes marciais. Treino de alta performance com instrutores certificados num ambiente profissional e motivador.</p>
+            <a href="#contact" class="cta-button">Agende a Sua Aula Experimental</a>
+        </div>
+    </section>
+
+    <!-- MODALIDADES -->
+    <section id="classes" class="classes">
+        <h2 class="section-title">As Nossas Modalidades</h2>
+        <div class="classes-grid">
+            <div class="class-card">
+                <h3>Brazilian Jiu-Jitsu</h3>
+                <p>A arte suave que ensina técnicas de defesa pessoal, controlo e finalizações no solo.</p>
+                <ul>
+                    <li>Gi e No-Gi</li>
+                    <li>Todos os níveis</li>
+                    <li>Competições regulares</li>
+                    <li>Graduação oficial</li>
+                </ul>
+            </div>
+            <div class="class-card">
+                <h3>MMA - Artes Marciais Mistas</h3>
+                <p>Treino completo combinando striking, wrestling e jiu-jitsu para combate real.</p>
+                <ul>
+                    <li>Técnicas de striking</li>
+                    <li>Clinch e takedowns</li>
+                    <li>Ground & Pound</li>
+                    <li>Condicionamento físico</li>
+                </ul>
+            </div>
+            <div class="class-card">
+                <h3>Condicionamento</h3>
+                <p>Prepare o seu corpo para o combate com treinos funcionais de alta intensidade.</p>
+                <ul>
+                    <li>HIIT para lutadores</li>
+                    <li>Força e resistência</li>
+                    <li>Mobilidade e flexibilidade</li>
+                    <li>Cardio específico</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section id="benefits" class="benefits">
+        <h2 class="section-title">Porquê Treinar Connosco?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">🥋</div>
+                <h3>Instrutores Faixa Preta</h3>
+                <p>Equipa de professores com vasta experiência em competições e ensino</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">🎯</div>
+                <h3>Treino Personalizado</h3>
+                <p>Acompanhamento individual para atingir os seus objetivos específicos</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">🏆</div>
+                <h3>Infraestrutura Premium</h3>
+                <p>Tatames profissionais, vestiários completos e equipamentos de primeira</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">🤝</div>
+                <h3>Comunidade Forte</h3>
+                <p>Faça parte de uma família que se apoia e evolui em conjunto</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Entre em Contacto</h2>
+        <p style="color: #aaa; max-width: 600px; margin: 0 auto 2rem;">
+            Agende a sua aula experimental gratuita e descubra o poder das artes marciais!
+        </p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>📍 Morada</h3>
+                <p style="color: #aaa;">Rua dos Lutadores, 123<br>Lisboa, Portugal</p>
+            </div>
+            <div class="contact-item">
+                <h3>📱 Contacto</h3>
+                <p style="color: #aaa;">(+351) 961 234 567<br>WhatsApp disponível</p>
+            </div>
+            <div class="contact-item">
+                <h3>📧 Email</h3>
+                <p style="color: #aaa;">contacto@lfa.pt<br>Resposta em 24h</p>
+            </div>
+        </div>
+        <a href="#home" class="cta-button" style="margin-top: 2rem;">Comece a Sua Jornada Hoje</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 LFA - Todos os direitos reservados.</p>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Academia de Artes Marciais | Lisboa, Portugal</p>
+    </footer>
+
+    <script src="routes/auth.js"></script>
+</body>
+</html>

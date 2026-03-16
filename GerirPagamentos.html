@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerir Pagamentos - Admin LFA</title>
+    <link rel="stylesheet" href="css/styleGerirPagamentos.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>💰 Gerir Pagamentos</h1>
+                <div class="user-info">
+                    <span id="nomeAdmin">Admin</span>
+                    <button id="btnVoltar" class="btn-voltar" onclick="window.location.href='Admin.html'">← Voltar</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Estatísticas -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon">💵</div>
+                    <div class="stat-info">
+                        <div class="stat-label">Total Arrecadado</div>
+                        <div class="stat-valor" id="totalArrecadado">€0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏳</div>
+                    <div class="stat-info">
+                        <div class="stat-label">Total Pendente</div>
+                        <div class="stat-valor" id="totalPendente">€0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚠️</div>
+                    <div class="stat-info">
+                        <div class="stat-label">Total Multas</div>
+                        <div class="stat-valor" id="totalMultas">€0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-info">
+                        <div class="stat-label">Taxa Pagamento</div>
+                        <div class="stat-valor" id="taxaPagamento">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ações -->
+            <div class="action-bar">
+                <button id="btnCriarMensalidades" class="btn-primary">+ Criar Mensalidades do Mês</button>
+                <div class="filtros">
+                    <select id="filtroStatus" class="filtro">
+                        <option value="">Todos os status</option>
+                        <option value="pendente">Pendente</option>
+                        <option value="atrasado">Atrasado</option>
+                        <option value="pago">Pago</option>
+                    </select>
+                    <select id="filtroMes" class="filtro">
+                        <option value="">Todos os meses</option>
+                        <option value="1">Janeiro</option>
+                        <option value="2">Fevereiro</option>
+                        <option value="3">Março</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Maio</option>
+                        <option value="6">Junho</option>
+                        <option value="7">Julho</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                    <select id="filtroAno" class="filtro">
+                        <option value="">Todos os anos</option>
+                        <option value="2026">2026</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lista de Pagamentos -->
+            <div class="pagamentos-container">
+                <h2>📋 Todos os Pagamentos</h2>
+                <div id="pagamentosGrid" class="pagamentos-grid">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Criar Mensalidades -->
+    <div id="modalCriar" class="modal">
+        <div class="modal-content">
+            <h3>Criar Mensalidades do Mês</h3>
+            <form id="formCriarMensalidades">
+                <div class="form-group">
+                    <label>Mês *</label>
+                    <select id="inputMes" required>
+                        <option value="">Selecionar...</option>
+                        <option value="1">Janeiro</option>
+                        <option value="2">Fevereiro</option>
+                        <option value="3">Março</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Maio</option>
+                        <option value="6">Junho</option>
+                        <option value="7">Julho</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ano *</label>
+                    <input type="number" id="inputAno" required min="2024" max="2030" value="2026">
+                </div>
+                <p class="aviso">Isto criará mensalidades de €35 para TODOS os alunos, com vencimento dia 10 do mês selecionado.</p>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-confirmar">Criar</button>
+                    <button type="button" class="btn-cancelar" id="btnCancelarCriar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Registar Pagamento -->
+    <div id="modalRegistar" class="modal">
+        <div class="modal-content">
+            <h3>Registar Pagamento</h3>
+            <div id="infoPagamento" class="info-pagamento">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+            <form id="formRegistar">
+                <div class="form-group">
+                    <label>Valor Pago (€) *</label>
+                    <input type="number" id="inputValorPago" required min="0" step="0.01" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label>Observações</label>
+                    <textarea id="inputObservacoes" rows="3" placeholder="Observações opcionais..."></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-confirmar">Registar</button>
+                    <button type="button" class="btn-cancelar" id="btnCancelarRegistar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Confirmação -->
+    <div id="modalConfirm" class="modal">
+        <div class="modal-content">
+            <h3 id="modalConfirmTitle">Confirmar</h3>
+            <p id="modalConfirmMessage">Mensagem</p>
+            <div class="modal-buttons">
+                <button id="btnConfirmar" class="btn-confirmar">Confirmar</button>
+                <button id="btnCancelar" class="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/gerirPagamentos.js"></script>
+</body>
+</html>

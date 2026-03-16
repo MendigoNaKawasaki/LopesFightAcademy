@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Os Nossos Atletas - LFA</title>
+    <meta name="description" content="Conheça os atletas da LFA Academia de Artes Marciais">
+    <link rel="stylesheet" href="css/styleMenuAtletas.css">
+    <link rel="shortcut icon" href="media/tiny.png" type="image/x-icon">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="media/pequeno.png" alt="LFA">
+            </a>
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="Aulas.html">Aulas</a>
+            <a href="Atletas.html" class="active">Atletas</a>
+            <a href="Perfil.html" id="perfilLink" style="display: none;">Perfil</a>
+            
+            <button class="auth-button" id="loginBtn">Entrar / Criar Conta</button>
+            
+            <div class="user-info" id="userInfo" style="display: none;">
+                <span class="user-name" id="userName"></span>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-atletas">
+        <div class="hero-content">
+            <h1>🥋 Os Nossos Atletas</h1>
+            <p>Conheça os guerreiros que treinam na LFA</p>
+            <div class="stats-banner">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalAtletas">0</span>
+                    <span class="stat-label">Atletas</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalVitorias">0</span>
+                    <span class="stat-label">Vitórias</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalFaixasPreta">0</span>
+                    <span class="stat-label">Faixas Pretas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FILTROS -->
+    <section class="filtros-section">
+        <div class="container">
+            <div class="filtros">
+                <div class="filtro-group">
+                    <label for="filtroFaixa">Graduação:</label>
+                    <select id="filtroFaixa">
+                        <option value="">Todas as Faixas</option>
+                        <option value="Branca">Branca</option>
+                        <option value="Amarela">Amarela</option>
+                        <option value="Laranja">Laranja</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Azul">Azul</option>
+                        <option value="Marrom">Castanha (Marrom)</option>
+                        <option value="Preta">Preta</option>
+                    </select>
+                </div>
+                
+                <div class="filtro-group">
+                    <label for="filtroBusca">Buscar:</label>
+                    <input 
+                        type="text" 
+                        id="filtroBusca" 
+                        placeholder="Nome do atleta..."
+                    >
+                </div>
+                
+                <button class="btn-limpar" id="btnLimparFiltros">
+                    Limpar Filtros
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRID DE ATLETAS -->
+    <section class="atletas-section">
+        <div class="container">
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>A carregar atletas...</p>
+            </div>
+
+            <!-- Grid -->
+            <div class="atletas-grid" id="atletasGrid">
+                <!-- Cards serão inseridos aqui via JavaScript -->
+            </div>
+
+            <!-- Sem resultados -->
+            <div class="sem-resultados" id="semResultados" style="display: none;">
+                <h3>😔 Nenhum atleta encontrado</h3>
+                <p>Tente ajustar os filtros ou limpar a busca</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL DE PERFIL DETALHADO -->
+    <div class="modal" id="perfilModal" style="display: none;">
+        <div class="modal-content modal-perfil">
+            <button class="close-modal" id="closePerfilModal">&times;</button>
+            
+            <div class="perfil-header">
+                <div class="perfil-avatar" id="modalAvatar">
+                    <span id="modalInitials"></span>
+                </div>
+                <div class="perfil-info">
+                    <h2 id="modalNome">Nome do Atleta</h2>
+                    <p class="perfil-email" id="modalEmail">email@exemplo.com</p>
+                    <span class="perfil-badge" id="modalFaixa">Faixa</span>
+                </div>
+            </div>
+
+            <div class="perfil-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🥊</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Record MMA</span>
+                        <span class="stat-value" id="modalRecordMMA">0-0-0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🤼</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Record BJJ</span>
+                        <span class="stat-value" id="modalRecordBJJ">0-0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📏</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Características</span>
+                        <span class="stat-value" id="modalFisico">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="perfil-sobre" id="modalSobreSection" style="display: none;">
+                <h3>Sobre</h3>
+                <p id="modalSobre"></p>
+            </div>
+
+            <div class="perfil-especialidades">
+                <div class="especialidade" id="modalEspMMA" style="display: none;">
+                    <strong>Especialidade MMA:</strong>
+                    <span id="modalEspMMATexto"></span>
+                </div>
+                <div class="especialidade" id="modalEspBJJ" style="display: none;">
+                    <strong>Especialidade BJJ:</strong>
+                    <span id="modalEspBJJTexto"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 LFA - Todos os direitos reservados.</p>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+            Academia de Artes Marciais | Lisboa, Portugal
+        </p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="routes/auth.js"></script>
+    <script src="script/atletas.js"></script>
+</body>
+</html>

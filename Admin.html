@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrador - LFA</title>
+    <link rel="stylesheet" href="css/styleAdmin.css">
+    <link rel="shortcut icon" href="media/tiny.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="media/pequeno.png" alt="LFA Logo">
+        </a>
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li>Painel Administrador</li>
+        </ul>
+        <div class="header-actions">
+            <span class="admin-name" id="adminName"></span>
+            <button class="btn-logout-header" onclick="logout()">Sair</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="admin-container">
+            <h1 class="page-title">👨‍💼 Painel de Administração</h1>
+            
+            <!-- Statistics Dashboard -->
+            <div class="stats-dashboard">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total de Utilizadores</span>
+                        <span class="stat-value" id="totalUtilizadores">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🆕</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Novos Hoje</span>
+                        <span class="stat-value" id="novosHoje">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍💼</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Administradores</span>
+                        <span class="stat-value" id="totalAdmins">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🥋</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Graduação Mais Comum</span>
+                        <span class="stat-value" id="graduacaoComum">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links-section">
+                <h2 class="section-title">⚡ Gestão Rápida</h2>
+                <div class="quick-links-grid">
+                    <a href="GerirAulas.html" class="quick-link-card">
+                        <div class="quick-link-icon">📅</div>
+                        <div class="quick-link-title">Gerir Aulas</div>
+                        <div class="quick-link-desc">Criar e gerir horário de aulas</div>
+                    </a>
+                    <a href="GerirPagamentos.html" class="quick-link-card">
+                        <div class="quick-link-icon">💰</div>
+                        <div class="quick-link-title">Gerir Pagamentos</div>
+                        <div class="quick-link-desc">Mensalidades e multas</div>
+                    </a>
+                    <a href="Perfil.html" class="quick-link-card">
+                        <div class="quick-link-icon">👤</div>
+                        <div class="quick-link-title">Meu Perfil</div>
+                        <div class="quick-link-desc">Ver e editar perfil</div>
+                    </a>
+                    <a href="Atletas.html" class="quick-link-card">
+                        <div class="quick-link-icon">🥋</div>
+                        <div class="quick-link-title">Atletas</div>
+                        <div class="quick-link-desc">Ver todos os atletas</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="controls-section">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="🔍 Pesquisar por nome ou email..."
+                    class="search-input"
+                >
+                <button class="btn-refresh" onclick="loadAllUsers()">
+                    🔄 Atualizar
+                </button>
+            </div>
+
+            <!-- Users Table -->
+            <div class="table-container">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Idade</th>
+                            <th>Graduação</th>
+                            <th>Record MMA</th>
+                            <th>Admin</th>
+                            <th>Registado</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr>
+                            <td colspan="8" class="loading-row">Carregando utilizadores...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- View User Modal -->
+    <div id="viewUserModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close-modal" onclick="closeViewModal()">&times;</span>
+            <h2>📋 Detalhes do Utilizador</h2>
+            <div id="userDetailsContent">
+                <!-- Content will be populated by JS -->
+            </div>
+            <button class="modal-btn" onclick="closeViewModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editUserModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close-modal" onclick="closeEditModal()">&times;</span>
+            <h2>✏️ Editar Utilizador</h2>
+            <form id="editUserForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="editNome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="editEmail" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Idade</label>
+                        <input type="number" id="editIdade" required min="5" max="120">
+                    </div>
+                    <div class="form-group">
+                        <label>Graduação</label>
+                        <select id="editGraduacao" required>
+                            <option value="Branca">Branca</option>
+                            <option value="Amarela">Amarela</option>
+                            <option value="Laranja">Laranja</option>
+                            <option value="Verde">Verde</option>
+                            <option value="Azul">Azul</option>
+                            <option value="Marrom">Marrom</option>
+                            <option value="Preta">Preta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3>Carreira MMA</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Vitórias</label>
+                        <input type="number" id="editMmaVitorias" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Derrotas</label>
+                        <input type="number" id="editMmaDerrotas" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Empates</label>
+                        <input type="number" id="editMmaEmpates" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Especialidade</label>
+                        <input type="text" id="editMmaEspecialidade" placeholder="Ex: Striking">
+                    </div>
+                </div>
+
+                <h3>Carreira BJJ</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Vitórias</label>
+                        <input type="number" id="editBjjVitorias" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Derrotas</label>
+                        <input type="number" id="editBjjDerrotas" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Especialidade</label>
+                        <input type="text" id="editBjjEspecialidade" placeholder="Ex: Guard">
+                    </div>
+                </div>
+
+                <h3>Características Físicas</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Altura (m)</label>
+                        <input type="number" id="editAltura" step="0.01" placeholder="1.75">
+                    </div>
+                    <div class="form-group">
+                        <label>Peso (kg)</label>
+                        <input type="number" id="editPeso" step="0.1" placeholder="70">
+                    </div>
+                    <div class="form-group">
+                        <label>Alcance (cm)</label>
+                        <input type="number" id="editAlcance" placeholder="180">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Sobre</label>
+                    <textarea id="editSobre" rows="3" placeholder="Biografia..."></textarea>
+                </div>
+
+                <div class="error-message" id="editError" style="display: none;"></div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeEditModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSuccessModal()">&times;</span>
+            <div class="success-icon">✓</div>
+            <h2 id="successTitle">Sucesso!</h2>
+            <p id="successMessage">Operação realizada com sucesso.</p>
+            <button class="modal-btn" onclick="closeSuccessModal()">OK</button>
+        </div>
+    </div>
+
+    <script src="script/Admin.js"></script>
+</body>
+</html>

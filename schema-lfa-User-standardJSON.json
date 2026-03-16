@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "_id",
+    "__v",
+    "alcance",
+    "altura",
+    "bjj_derrotas",
+    "bjj_especialidade",
+    "bjj_vitorias",
+    "dataCadastro",
+    "email",
+    "graduacao",
+    "idade",
+    "mma_derrotas",
+    "mma_empates",
+    "mma_especialidade",
+    "mma_vitorias",
+    "nome",
+    "pass",
+    "peso",
+    "sobre"
+  ],
+  "properties": {
+    "_id": {
+      "$ref": "#/$defs/ObjectId"
+    },
+    "__v": {
+      "type": "integer"
+    },
+    "alcance": {
+      "type": "null"
+    },
+    "altura": {
+      "type": "null"
+    },
+    "bjj_derrotas": {
+      "type": "integer"
+    },
+    "bjj_especialidade": {
+      "type": "null"
+    },
+    "bjj_vitorias": {
+      "type": "integer"
+    },
+    "dataCadastro": {
+      "$ref": "#/$defs/Date"
+    },
+    "email": {
+      "type": "string"
+    },
+    "graduacao": {
+      "type": "string"
+    },
+    "idade": {
+      "type": "integer"
+    },
+    "mma_derrotas": {
+      "type": "integer"
+    },
+    "mma_empates": {
+      "type": "integer"
+    },
+    "mma_especialidade": {
+      "type": "null"
+    },
+    "mma_vitorias": {
+      "type": "integer"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "pass": {
+      "type": "string"
+    },
+    "peso": {
+      "type": "null"
+    },
+    "sobre": {
+      "type": "null"
+    }
+  },
+  "$defs": {
+    "ObjectId": {
+      "type": "object",
+      "properties": {
+        "$oid": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{24}$"
+        }
+      },
+      "required": [
+        "$oid"
+      ],
+      "additionalProperties": false
+    },
+    "Date": {
+      "type": "object",
+      "properties": {
+        "$date": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "$date"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

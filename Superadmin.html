@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Super Administrador - LFA</title>
+    <link rel="stylesheet" href="css/Superadmin.css">
+    <link rel="shortcut icon" href="media/tiny.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="media/pequeno.png" alt="LFA Logo">
+        </a>
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Admin.html">Admin</a></li>
+            <li>Super Admin</li>
+        </ul>
+        <div class="header-actions">
+            <span class="superadmin-badge">👑 SUPER ADMIN</span>
+            <span class="admin-name" id="adminName"></span>
+            <button class="btn-logout-header" onclick="logout()">Sair</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="superadmin-container">
+            <h1 class="page-title">👑 Painel de Super Administração</h1>
+            
+            <!-- Advanced Statistics Dashboard -->
+            <div class="stats-dashboard">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total de Utilizadores</span>
+                        <span class="stat-value" id="totalUtilizadores">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍💼</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total de Admins</span>
+                        <span class="stat-value" id="totalAdmins">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">👑</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Super Admins</span>
+                        <span class="stat-value" id="totalSuperAdmins">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🆕</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Novos (7 dias)</span>
+                        <span class="stat-value" id="novosUltimos7Dias">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Admins Automáticos</span>
+                        <span class="stat-value" id="adminsAutomaticos">0</span>
+                        <span class="stat-subtitle">Preta + Castanha</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">👤</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Utilizadores Normais</span>
+                        <span class="stat-value" id="totalNormais">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs-container">
+                <button class="tab-btn active" data-tab="admins">👨‍💼 Gestão de Admins</button>
+                <button class="tab-btn" data-tab="graduacoes">🥋 Por Graduação</button>
+                <button class="tab-btn" data-tab="logs">📜 Logs do Sistema</button>
+            </div>
+
+            <!-- Tab: Admins -->
+            <div class="tab-content active" id="admins-tab">
+                <h2>Gestão de Administradores</h2>
+                <p class="tab-description">Todos os administradores do sistema (Faixa Preta + Castanha + Promovidos manualmente)</p>
+                
+                <div class="table-container">
+                    <table class="admins-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Graduação</th>
+                                <th>Tipo</th>
+                                <th>Membro desde</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminsTableBody">
+                            <tr>
+                                <td colspan="6" class="loading-row">Carregando administradores...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab: Graduações -->
+            <div class="tab-content" id="graduacoes-tab">
+                <h2>Distribuição por Graduação</h2>
+                <p class="tab-description">Análise de utilizadores por faixa (admins automáticos destacados)</p>
+                
+                <div id="graduacoesChart" class="chart-container">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+
+            <!-- Tab: Logs -->
+            <div class="tab-content" id="logs-tab">
+                <h2>Logs do Sistema</h2>
+                <p class="tab-description">Últimas 50 atividades do sistema</p>
+                
+                <div class="table-container">
+                    <table class="logs-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Utilizador</th>
+                                <th>Email</th>
+                                <th>Graduação</th>
+                                <th>Admin</th>
+                                <th>Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logsTableBody">
+                            <tr>
+                                <td colspan="6" class="loading-row">Carregando logs...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSuccessModal()">&times;</span>
+            <div class="success-icon">✓</div>
+            <h2 id="successTitle">Sucesso!</h2>
+            <p id="successMessage">Operação realizada com sucesso.</p>
+            <button class="modal-btn" onclick="closeSuccessModal()">OK</button>
+        </div>
+    </div>
+
+    <script src="script/Superadmin.js"></script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - LFA</title>
+    <link rel="stylesheet" href="css/stylePerfil.css">
+    <link rel="stylesheet" href="css/cropfoto.css">
+    <link rel="stylesheet" href="css/cropupload.css">
+    <link rel="shortcut icon" href="media/tiny.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="media/pequeno.png" alt="LFA Logo">
+        </a>
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li>Meu Perfil</li>
+        </ul>
+    </header>
+
+    <main>
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <span id="avatarInitials"></span>
+                </div>
+                <div class="profile-info">
+                    <h1 id="profileName">Carregando...</h1>
+                    <p class="profile-email" id="profileEmail"></p>
+                    <span class="profile-badge" id="profileBadge"></span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links-section">
+                <div class="quick-links-grid">
+                    <a href="Aulas.html" class="quick-link-card">
+                        <div class="quick-link-icon">📅</div>
+                        <div class="quick-link-title">Minhas Aulas</div>
+                        <div class="quick-link-desc">Ver horário e inscrever-me</div>
+                    </a>
+                    <a href="Mensalidades.html" class="quick-link-card">
+                        <div class="quick-link-icon">💰</div>
+                        <div class="quick-link-title">Mensalidades</div>
+                        <div class="quick-link-desc">Ver pagamentos e multas</div>
+                    </a>
+                    <a href="Atletas.html" class="quick-link-card">
+                        <div class="quick-link-icon">🥋</div>
+                        <div class="quick-link-title">Atletas</div>
+                        <div class="quick-link-desc">Ver todos os atletas</div>
+                    </a>
+                    <a href="Admin.html" class="quick-link-card admin-only" id="adminLink" style="display: none;">
+                        <div class="quick-link-icon">⚙️</div>
+                        <div class="quick-link-title">Painel Admin</div>
+                        <div class="quick-link-desc">Gestão do sistema</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Photo Upload Section -->
+            <div class="profile-section photo-section">
+                <div class="section-header">
+                    <h2>📸 Foto de Perfil</h2>
+                </div>
+                
+                <div class="photo-container">
+                    <div class="photo-preview">
+                        <img id="fotoPreview" src="" alt="Foto de Perfil" style="display: none;">
+                        <div class="photo-placeholder" id="fotoPlaceholder">
+                            <span id="fotoInitials"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-actions">
+                        <input type="file" id="fotoInput" accept="image/jpeg,image/jpg,image/png,image/webp" style="display: none;">
+                        <button type="button" class="btn-upload" id="btnUploadFoto">
+                            📷 Escolher Foto
+                        </button>
+                        <button type="button" class="btn-remove" id="btnRemoverFoto" style="display: none;">
+                            🗑️ Remover Foto
+                        </button>
+                        <p class="photo-info">
+                            Formatos: JPG, PNG, WEBP • Máximo: 5MB
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🥋</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Graduação</span>
+                        <span class="stat-value" id="statGraduacao">-</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🥊</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Record MMA</span>
+                        <span class="stat-value" id="statRecordMMA">0-0-0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🤼</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Record BJJ</span>
+                        <span class="stat-value" id="statRecordBJJ">0-0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-info">
+                        <span class="stat-label">Membro desde</span>
+                        <span class="stat-value" id="statMembro">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Form -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h2>Informações Pessoais</h2>
+                    <button class="btn-edit" id="editBtn" onclick="toggleEditMode()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                        Editar
+                    </button>
+                </div>
+
+                <form id="profileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo</label>
+                            <input type="text" id="nome" disabled required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" disabled required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="idade">Idade</label>
+                            <input type="number" id="idade" disabled required min="1" max="120">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="graduacao">Graduação / Faixa</label>
+                            <select id="graduacao" disabled required>
+                                <option value="">Selecione...</option>
+                                <option value="Branca">Branca</option>
+                                <option value="Amarela">Amarela</option>
+                                <option value="Laranja">Laranja</option>
+                                <option value="Verde">Verde</option>
+                                <option value="Azul">Azul</option>
+                                <option value="Marrom">Marrom</option>
+                                <option value="Preta">Preta</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Carreira MMA -->
+                    <h3 class="subsection-title">Carreira de MMA</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mmaVitorias">Vitórias</label>
+                            <input type="number" id="mmaVitorias" disabled min="0" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mmaDerrotas">Derrotas</label>
+                            <input type="number" id="mmaDerrotas" disabled min="0" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mmaEmpates">Empates</label>
+                            <input type="number" id="mmaEmpates" disabled min="0" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mmaEspecialidade">Especialidade</label>
+                            <input type="text" id="mmaEspecialidade" disabled placeholder="Ex: Striking, Grappling">
+                        </div>
+                    </div>
+
+                    <!-- Carreira BJJ -->
+                    <h3 class="subsection-title">Carreira de BJJ</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bjjVitorias">Vitórias</label>
+                            <input type="number" id="bjjVitorias" disabled min="0" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bjjDerrotas">Derrotas</label>
+                            <input type="number" id="bjjDerrotas" disabled min="0" value="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bjjEspecialidade">Especialidade</label>
+                            <input type="text" id="bjjEspecialidade" disabled placeholder="Ex: Guard, Submissions">
+                        </div>
+                    </div>
+
+                    <!-- Outros Dados -->
+                    <h3 class="subsection-title">Características Físicas</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="altura">Altura (m)</label>
+                            <input type="number" id="altura" disabled step="0.01" placeholder="Ex: 1.75">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="peso">Peso (kg)</label>
+                            <input type="number" id="peso" disabled step="0.1" placeholder="Ex: 70">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alcance">Alcance (cm)</label>
+                            <input type="number" id="alcance" disabled placeholder="Ex: 180">
+                        </div>
+                    </div>
+
+                    <!-- Sobre -->
+                    <h3 class="subsection-title">Sobre Mim</h3>
+                    <div class="form-group">
+                        <label for="sobre">Biografia / Descrição</label>
+                        <textarea id="sobre" disabled rows="5" placeholder="Conte um pouco sobre sua jornada nas artes marciais..."></textarea>
+                    </div>
+
+                    <div class="form-actions" id="formActions" style="display: none;">
+                        <button type="button" class="btn-secondary" onclick="cancelEdit()">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            Guardar Alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Change Password Section -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h2>Segurança</h2>
+                </div>
+
+                <button class="btn-change-password" id="changePasswordBtn" onclick="openPasswordModal()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    Alterar Palavra-Passe
+                </button>
+            </div>
+
+            <!-- Account Actions -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h2>Ações da Conta</h2>
+                </div>
+
+                <div class="account-actions">
+                    <button class="btn-logout" onclick="logout()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        Sair da Conta
+                    </button>
+                    <button class="btn-delete" onclick="confirmDeleteAccount()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Eliminar Conta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Change Password Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closePasswordModal()">&times;</span>
+            <h2>Alterar Palavra-Passe</h2>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="passAtual">Palavra-Passe Atual</label>
+                    <input type="password" id="passAtual" required>
+                </div>
+                <div class="form-group">
+                    <label for="novaPass">Nova Palavra-Passe</label>
+                    <input type="password" id="novaPass" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="confirmarNovaPass">Confirme a Nova Palavra-Passe</label>
+                    <input type="password" id="confirmarNovaPass" required>
+                </div>
+                <div class="error-message" id="passwordError"></div>
+                <button type="submit" class="modal-btn">Alterar Palavra-Passe</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSuccessModal()">&times;</span>
+            <div class="success-icon">✓</div>
+            <h2 id="successTitle">Sucesso!</h2>
+            <p id="successMessage">Operação realizada com sucesso.</p>
+            <button class="modal-btn" onclick="closeSuccessModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Modal de Crop de Imagem -->
+    <div id="cropModal" class="modal" style="display: none;">
+        <div class="modal-content crop-modal">
+            <span class="close-modal" id="closeCropModal">&times;</span>
+            <h2>📸 Recortar Imagem</h2>
+            
+            <div class="crop-container">
+                <div class="crop-preview-area">
+                    <img id="cropImage" src="" alt="Imagem para recortar">
+                    <div class="crop-overlay">
+                        <div class="crop-box" id="cropBox">
+                            <div class="crop-handle crop-nw"></div>
+                            <div class="crop-handle crop-ne"></div>
+                            <div class="crop-handle crop-sw"></div>
+                            <div class="crop-handle crop-se"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="crop-controls">
+                    <div class="crop-info">
+                        <p>📏 Arraste para posicionar • Use os cantos para redimensionar</p>
+                        <p id="cropSize">Tamanho: 300x300px</p>
+                    </div>
+                    
+                    <div class="crop-zoom">
+                        <label>🔍 Zoom:</label>
+                        <input type="range" id="cropZoom" min="100" max="300" value="100" step="10">
+                        <span id="zoomValue">100%</span>
+                    </div>
+                    
+                    <div class="crop-actions">
+                        <button type="button" class="btn-secondary" id="cancelCrop">Cancelar</button>
+                        <button type="button" class="btn-primary" id="confirmCrop">✓ Recortar e Enviar</button>
+                    </div>
+                </div>
+            </div>
+            
+            <canvas id="cropCanvas" style="display: none;"></canvas>
+        </div>
+    </div>
+
+    <script src="script/perfil.js"></script>
+    <script src="script/photoCrop.js"></script>
+    <script src="routes/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Mensalidades - LFA</title>
+    <link rel="stylesheet" href="css/styleMensalidades.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>💰 Minhas Mensalidades</h1>
+                <div class="header-nav">
+                    <a href="Perfil.html" class="nav-link">👤 Perfil</a>
+                    <a href="Aulas.html" class="nav-link">📅 Aulas</a>
+                </div>
+                <div class="user-info">
+                    <span id="nomeUtilizador">Carregando...</span>
+                    <button id="btnLogout" class="btn-logout">Sair</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Resumo -->
+            <div class="resumo-container">
+                <div class="resumo-card pendentes">
+                    <div class="resumo-icon">⏳</div>
+                    <div class="resumo-info">
+                        <div class="resumo-label">Pendentes</div>
+                        <div class="resumo-valor" id="totalPendentes">€0</div>
+                    </div>
+                </div>
+                <div class="resumo-card atrasadas">
+                    <div class="resumo-icon">⚠️</div>
+                    <div class="resumo-info">
+                        <div class="resumo-label">Atrasadas</div>
+                        <div class="resumo-valor" id="totalAtrasadas">0</div>
+                    </div>
+                </div>
+                <div class="resumo-card pagas">
+                    <div class="resumo-icon">✓</div>
+                    <div class="resumo-info">
+                        <div class="resumo-label">Pagas</div>
+                        <div class="resumo-valor" id="totalPagas">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensalidades Pendentes -->
+            <div class="secao">
+                <h2>⏳ Mensalidades Pendentes</h2>
+                <div id="listaPendentes" class="lista-pagamentos">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Histórico -->
+            <div class="secao">
+                <h2>📜 Histórico de Pagamentos</h2>
+                <div id="listaHistorico" class="lista-pagamentos">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script/mensalidades.js"></script>
+</body>
+</html>

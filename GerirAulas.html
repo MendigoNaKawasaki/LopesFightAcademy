@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerir Aulas - Admin LFA</title>
+    <link rel="stylesheet" href="css/styleGerirAulas.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>⚙️ Gerir Aulas</h1>
+                <div class="user-info">
+                    <span id="nomeAdmin">Admin</span>
+                    <button id="btnVoltar" class="btn-voltar" onclick="window.location.href='Admin.html'">← Voltar</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Botão Criar Nova Aula -->
+            <div class="action-bar">
+                <button id="btnNovaAula" class="btn-primary">+ Nova Aula</button>
+            </div>
+
+            <!-- Lista de Aulas -->
+            <div class="aulas-container">
+                <h2>📋 Todas as Aulas</h2>
+                <div id="aulasGrid" class="aulas-grid">
+                    <!-- Será preenchido via JavaScript -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Criar/Editar Aula -->
+    <div id="modalAula" class="modal">
+        <div class="modal-content modal-large">
+            <h3 id="modalTitle">Nova Aula</h3>
+            <form id="formAula">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nome da Aula *</label>
+                        <input type="text" id="inputNome" required placeholder="Ex: BJJ Fundamentals">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Professor *</label>
+                        <input type="text" id="inputProfessor" required placeholder="Ex: Prof. João Silva">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dia da Semana *</label>
+                        <select id="inputDiaSemana" required>
+                            <option value="">Selecionar...</option>
+                            <option value="1">Segunda-feira</option>
+                            <option value="2">Terça-feira</option>
+                            <option value="3">Quarta-feira</option>
+                            <option value="4">Quinta-feira</option>
+                            <option value="5">Sexta-feira</option>
+                            <option value="6">Sábado</option>
+                            <option value="7">Domingo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hora *</label>
+                        <input type="time" id="inputHora" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Duração (minutos)</label>
+                        <input type="number" id="inputDuracao" value="60" min="30" max="180" step="15">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Limite de Alunos *</label>
+                        <input type="number" id="inputLimite" required min="1" max="100" placeholder="Ex: 20">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cor</label>
+                        <select id="inputCor">
+                            <option value="#10b981">Verde (padrão)</option>
+                            <option value="#3b82f6">Azul</option>
+                            <option value="#8b5cf6">Roxo</option>
+                            <option value="#f59e0b">Laranja</option>
+                            <option value="#ef4444">Vermelho</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="inputAtiva">
+                            <option value="true">Ativa</option>
+                            <option value="false">Inativa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-confirmar">Salvar</button>
+                    <button type="button" class="btn-cancelar" id="btnCancelarForm">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Ver Alunos -->
+    <div id="modalAlunos" class="modal">
+        <div class="modal-content modal-large">
+            <h3 id="modalAlunosTitle">Alunos Inscritos</h3>
+            <div id="modalAlunosInfo" class="alunos-info"></div>
+            <div id="listaAlunos" class="lista-alunos">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+            <div class="modal-buttons">
+                <button type="button" class="btn-cancelar" id="btnFecharAlunos">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Confirmação -->
+    <div id="modalConfirm" class="modal">
+        <div class="modal-content">
+            <h3 id="modalConfirmTitle">Confirmar</h3>
+            <p id="modalConfirmMessage">Mensagem</p>
+            <div class="modal-buttons">
+                <button id="btnConfirmar" class="btn-confirmar">Confirmar</button>
+                <button id="btnCancelar" class="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/gerirAulas.js"></script>
+</body>
+</html>
