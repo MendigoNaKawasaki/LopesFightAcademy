@@ -1,3 +1,5 @@
+app.listen(process.env.PORT || 3000)
+
 // Só usa dotenv em desenvolvimento local
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
