@@ -100,13 +100,33 @@
         </div>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO COM SLIDESHOW -->
     <section id="home" class="hero">
+        <!-- Slideshow Background -->
+        <div class="hero-slideshow">
+            <div class="slide active" style="background-image: url('media/slideshow/slide1.jpeg')"></div>
+            <div class="slide" style="background-image: url('media/slideshow/slide1.jpeg')"></div>
+            <div class="slide" style="background-image: url('media/slideshow/slide2.jpeg')"></div>
+            <div class="slide" style="background-image: url('media/slideshow/slide3.jpeg')"></div>
+        </div>
+        
+        <!-- Overlay escuro para manter texto legível -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Conteúdo sobre o slideshow -->
         <div class="hero-content">
-            <h1><img src="media/pequeno.png" alt="LFA"></h1>
+            <h1><img src="media/LFAbranco.png" alt="LFA"></h1>
             <div class="subtitle">MMA & Brazilian Jiu-Jitsu</div>
             <p>Transforma o teu corpo e mente através das artes marciais. Treino de alta performance com instrutores certificados num ambiente profissional e motivador.</p>
             <a href="#contact" class="cta-button">Agende a Sua Aula Experimental</a>
+        </div>
+        
+        <!-- Indicadores de slide -->
+        <div class="slide-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
         </div>
     </section>
 
@@ -189,10 +209,12 @@
                 <h3>📱 Contacto</h3>
                 <p style="color: #aaa;">(+351) 961 234 567<br>WhatsApp disponível</p>
             </div>
-            <div class="contact-item">
-                <h3>📧 Email</h3>
-                <p style="color: #aaa;">contacto@lfa.pt<br>Resposta em 24h</p>
-            </div>
+            <center>
+                <div class="contact-item">
+                    <h3>📧 Email</h3>
+                    <p style="color: #aaa;">contacto@lfa.pt<br>Resposta em 24h</p>
+                </div>
+            </center>
         </div>
         <a href="#home" class="cta-button" style="margin-top: 2rem;">Comece a Sua Jornada Hoje</a>
     </section>
@@ -204,5 +226,6 @@
     </footer>
 
     <script src="routes/auth.js"></script>
+    <script src="script/index.js"></script>
 </body>
 </html>

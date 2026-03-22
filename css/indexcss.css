@@ -248,8 +248,6 @@ nav a:hover::after {
     background: rgba(255, 255, 255, 0.08);
 }
 
-/* ========== SELECT / DROPDOWN ========== */
-
 .form-group select {
     appearance: none;
     -webkit-appearance: none;
@@ -270,8 +268,6 @@ nav a:hover::after {
 .form-group select option:first-child {
     color: #666;
 }
-
-/* ========== BOTÕES ========== */
 
 .submit-btn {
     width: 100%;
@@ -296,8 +292,6 @@ nav a:hover::after {
     opacity: 0.5;
     cursor: not-allowed;
 }
-
-/* ========== MENSAGENS ========== */
 
 .error-message {
     background: rgba(239, 68, 68, 0.1);
@@ -328,7 +322,7 @@ nav a:hover::after {
     margin-top: 1rem;
 }
 
-/* ========== HERO ========== */
+/* ========== HERO COM SLIDESHOW ========== */
 
 .hero {
     height: 100vh;
@@ -336,11 +330,71 @@ nav a:hover::after {
     align-items: center;
     justify-content: center;
     position: relative;
-    background: linear-gradient(135deg, #0a0a0a 0%, #0a1a0a 50%, #0a0a0a 100%);
     overflow: hidden;
 }
 
-.hero::before {
+/* Container do slideshow */
+.hero-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Cada slide individual */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    animation: kenBurns 20s infinite;
+}
+
+/* Efeito Ken Burns (zoom suave) */
+@keyframes kenBurns {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Slide ativo */
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Overlay escuro para manter texto legível */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(10, 26, 10, 0.8) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    z-index: 2;
+}
+
+/* Efeito de pulso no overlay 
+.hero-overlay::after {
     content: '';
     position: absolute;
     top: 0;
@@ -348,21 +402,24 @@ nav a:hover::after {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
     animation: pulse 4s ease-in-out infinite;
 }
+*/
 
 @keyframes pulse {
     0%, 100% { opacity: 0.5; }
     50% { opacity: 1; }
 }
 
+/* Conteúdo do hero */
 .hero-content {
     text-align: center;
-    z-index: 1;
+    z-index: 3;
     max-width: 900px;
     padding: 2rem;
+    position: relative;
 }
 
 .hero h1 {
@@ -378,14 +435,16 @@ nav a:hover::after {
     color: #22c55e;
     margin-bottom: 2rem;
     animation: slideUpHero 1s ease-out 0.2s backwards;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
     font-size: 1.2rem;
-    color: #aaa;
+    color: #ddd;
     margin-bottom: 2rem;
     line-height: 1.8;
     animation: slideUpHero 1s ease-out 0.4s backwards;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes slideUpHero {
@@ -416,6 +475,38 @@ nav a:hover::after {
 .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(34, 197, 94, 0.5);
+}
+
+/* Indicadores de slide */
+.slide-indicators {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 1rem;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+}
+
+.indicator.active {
+    background: #22c55e;
+    border-color: #22c55e;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
 }
 
 /* ========== SECTIONS ========== */
@@ -528,45 +619,6 @@ section {
     line-height: 1.6;
 }
 
-/* ========== SCHEDULE ========== */
-
-.schedule {
-    background: #0f0f0f;
-}
-
-.schedule-table {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: #1a1a1a;
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid rgba(34, 197, 94, 0.2);
-}
-
-.schedule-row {
-    display: grid;
-    grid-template-columns: 150px 1fr 1fr;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.schedule-row:last-child {
-    border-bottom: none;
-}
-
-.schedule-cell {
-    padding: 1.5rem;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.schedule-cell:last-child {
-    border-right: none;
-}
-
-.schedule-header {
-    background: linear-gradient(135deg, #22c55e, #10b981);
-    font-weight: bold;
-}
-
 /* ========== CONTACT ========== */
 
 .contact {
@@ -615,115 +667,25 @@ footer {
         font-size: 1.2rem;
     }
 
+    .hero p {
+        font-size: 1rem;
+    }
+
     nav {
         gap: 1rem;
-    }
-
-    .schedule-row {
-        grid-template-columns: 1fr;
-    }
-
-    .schedule-cell {
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .modal-content {
         padding: 2rem;
         width: 95%;
     }
-}
-
-/* ========================================
-   MODAL DE SUCESSO - ADICIONAR AO stylePerfil.css
-======================================== */
-
-/* Se o modal de sucesso não aparecer, adicione este CSS: */
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-    padding: 2rem;
-    border-radius: 15px;
-    max-width: 500px;
-    width: 90%;
-    position: relative;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    text-align: center;
-}
-
-.close-modal {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2rem;
-    color: #888;
-    cursor: pointer;
-    background: none;
-    border: none;
-    transition: color 0.3s;
-}
-
-.close-modal:hover {
-    color: #fff;
-}
-
-.success-icon {
-    font-size: 4rem;
-    color: #22c55e;
-    margin-bottom: 1rem;
-    animation: scaleIn 0.5s ease-out;
-}
-
-@keyframes scaleIn {
-    from {
-        transform: scale(0);
-        opacity: 0;
+    
+    .slide-indicators {
+        bottom: 2rem;
     }
-    to {
-        transform: scale(1);
-        opacity: 1;
+    
+    .indicator {
+        width: 10px;
+        height: 10px;
     }
-}
-
-#successTitle {
-    color: #fff;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
-#successMessage {
-    color: #aaa;
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    line-height: 1.6;
-}
-
-.modal-btn {
-    background: linear-gradient(135deg, #22c55e, #10b981);
-    color: white;
-    border: none;
-    padding: 0.8rem 2rem;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.modal-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
 }

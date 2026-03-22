@@ -1,9 +1,4 @@
-app.listen(process.env.PORT || 3000)
-
-// Só usa dotenv em desenvolvimento local
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+require('dotenv').config();
 const express = require("express");
 const path = require("path");
 const bcrypt = require("bcrypt");
