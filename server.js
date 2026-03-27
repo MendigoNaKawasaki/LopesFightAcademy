@@ -522,7 +522,7 @@ app.get("/api/perfil", autenticarToken, async (req, res) => {
   try {
     const utilizador = await User.findById(req.user.id).select("-pass");
     if (!utilizador) {
-      return res.status(404).json({ erro: "Utilizador não encontrado" });
+      return res.status(404).json({ erro: "Utilizador não encontrado"});
     }
 
     // Retornar com campos formatados para o frontend
